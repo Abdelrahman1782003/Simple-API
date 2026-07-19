@@ -9,6 +9,42 @@ let TASKS = [
 ];
 
 app.use(bodyParser.json());
+
+app.delete("/tasks/:id", (req, res, next) => {
+  const taskId = Number(req.params.id);
+  let taskIndex = TASKS.findIndex((task) => task.id === taskId);
+  if (taskIndex === -1) {
+    res.status(404);
+    return res.json({ message: "selected task was not found." });
+  }
+  TASKS.splice(taskIndex, 1);
+  res.status(204);
+  return res.json({ message: "Task deleted!" });
+});
+
+app.put("/tasks/:id", (req, res, next) => {
+  const taskId = Number(req.params.id);
+  let selectedTask = TASKS.filter((task) => task.id === taskId);
+  if (!selectedTask.length <= 0) {
+    const edits = req.body;
+    if (edits?.title != "" || edits?.done != null) {
+      edits.title
+        ? (selectedTask.title = edits.title)
+        : edits.done
+          ? (selectedTask.done = done)
+          : "";
+      edits.done ? (selectedTask.done = edits.done) : "";
+
+      res.status(200);
+      return res.json({ message: "task updated!" });
+    }
+    res.status(400);
+    return res.json({ message: "invalid values" });
+  }
+  res.status(404);
+  return res.json({ message: "task selected was not found." });
+});
+
 app.post("/tasks", (req, res, next) => {
   let newTask = req.body;
   console.log(newTask);
