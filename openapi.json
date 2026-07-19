@@ -1,0 +1,119 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Tasks API",
+    "descreption": "A simple Tasks API made as an assignment for Flyrank AI backend path internship",
+    "version": "1.0"
+  },
+  "servers": {
+    "url": "http://localhost:3000",
+    "descreption": "The main API server in dev env."
+  },
+  "paths": {
+    "/Tasks": {
+      "get": {
+        "summary": "Return a list of tasks.",
+        "responses": {
+          "200": {
+            "descreption": "A JSON array of Tasks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new task.",
+        "responses": {
+          "201": {
+            "descreption": "create a new task and add it to the tasks array",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "descreption": "invalid data entered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Edit an existing task.",
+        "responses": {
+          "200": {
+            "descreption": "edit an existing task ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "descreption": "invalid data entered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "descreption": "task id entered is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a task.",
+        "responses": {
+          "204": {
+            "descreption": "delete a task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "descreption": "task id is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

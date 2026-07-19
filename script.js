@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./openapi.json");
+
 let TASKS = [
   { id: 1, title: "Study backend.", done: true },
   { id: 2, title: "Create APIs.", done: true },
@@ -9,6 +12,7 @@ let TASKS = [
 ];
 
 app.use(bodyParser.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.delete("/tasks/:id", (req, res, next) => {
   const taskId = Number(req.params.id);
